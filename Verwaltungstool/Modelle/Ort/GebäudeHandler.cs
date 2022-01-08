@@ -25,10 +25,10 @@ namespace Verwaltungstool.Modelle.Ort
         public bool GebäudeExistiert(Gebäude gebäude)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gebäude WHERE GebäudeID ='{gebäude.GebäudeID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gebäude WHERE GebäudeID ='{gebäude.GebäudeID}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
@@ -41,18 +41,18 @@ namespace Verwaltungstool.Modelle.Ort
             int plz = -1;
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT adresse.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM gebäude, adresse, plz WHERE GebäudeID ='{gebäudeID}' AND gebäude.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT adresse.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM gebäude, adresse, plz WHERE GebäudeID ='{gebäudeID}' AND gebäude.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                adressID = result.GetInt32("AdressID");
+                adressID = ergebnis.GetInt32("AdressID");
 
-                hausnummer = result.GetString("Hausnummer");
-                straße = result.GetString("Straße");
-                plz = result.GetInt32("PLZ");
-                ort = result.GetString("Ort");
+                hausnummer = ergebnis.GetString("Hausnummer");
+                straße = ergebnis.GetString("Straße");
+                plz = ergebnis.GetInt32("PLZ");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return new Gebäude(gebäudeID, new Adresse(adressID, hausnummer, straße, plz, ort));
         }
@@ -61,13 +61,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> gebäudeIDs = new List<int>();
             List<Gebäude> gebäude = new List<Gebäude>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gebäude");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gebäude");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gebäudeIDs.Add(result.GetInt32("GebäudeID"));
+                gebäudeIDs.Add(ergebnis.GetInt32("GebäudeID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in gebäudeIDs)
             {

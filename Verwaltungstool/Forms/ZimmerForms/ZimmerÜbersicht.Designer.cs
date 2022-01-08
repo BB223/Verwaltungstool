@@ -48,7 +48,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.dateTimePickerDatum.Name = "dateTimePickerDatum";
             this.dateTimePickerDatum.Size = new System.Drawing.Size(205, 22);
             this.dateTimePickerDatum.TabIndex = 0;
-            this.dateTimePickerDatum.ValueChanged += new System.EventHandler(this.dateTimePickerDatum_ValueChanged);
+            this.dateTimePickerDatum.ValueChanged += new System.EventHandler(this.DateTimePickerDatum_ValueChanged);
             // 
             // comboBoxGebäude
             // 

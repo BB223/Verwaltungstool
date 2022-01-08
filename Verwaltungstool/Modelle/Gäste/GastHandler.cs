@@ -14,16 +14,16 @@ namespace Verwaltungstool.Modelle.Gäste
         {
             int gastID = -1;
             int tmp;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                if (gastID < (tmp = result.GetInt32("GastID")))
+                if (gastID < (tmp = ergebnis.GetInt32("GastID")))
                 {
                     gastID = tmp;
                 }
             }
-            result.Close();
+            ergebnis.Close();
 
             return gastID + 1;
         }
@@ -31,13 +31,13 @@ namespace Verwaltungstool.Modelle.Gäste
         {
             int gastID = -1;
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT GastID FROM gast WHERE Name ='{name}' && Nachname ='{nachname}' && Email ='{email}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT GastID FROM gast WHERE Name ='{name}' && Nachname ='{nachname}' && Email ='{email}'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gastID = result.GetInt32("GastID"); ;
+                gastID = ergebnis.GetInt32("GastID"); ;
             }
-            result.Close();
+            ergebnis.Close();
 
             return gastID;
         }
@@ -53,22 +53,22 @@ namespace Verwaltungstool.Modelle.Gäste
             int plz = -1;
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT gast.Name, gast.Nachname, gast.Email, gast.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM gast, adresse, plz WHERE GastID ='{gastID}' AND gast.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT gast.Name, gast.Nachname, gast.Email, gast.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM gast, adresse, plz WHERE GastID ='{gastID}' AND gast.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                name = result.GetString("Name");
-                nachname = result.GetString("Nachname");
-                email = result.GetString("Email");
-                adressID = result.GetInt32("AdressID");
+                name = ergebnis.GetString("Name");
+                nachname = ergebnis.GetString("Nachname");
+                email = ergebnis.GetString("Email");
+                adressID = ergebnis.GetInt32("AdressID");
 
-                hausnummer = result.GetString("Hausnummer");
-                straße = result.GetString("Straße");
-                plz = result.GetInt32("PLZ");
+                hausnummer = ergebnis.GetString("Hausnummer");
+                straße = ergebnis.GetString("Straße");
+                plz = ergebnis.GetInt32("PLZ");
 
-                ort = result.GetString("Ort");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return new Gast(gastID, name, nachname, email, new Adresse(adressID, hausnummer, straße, plz, ort));
         }
@@ -88,25 +88,28 @@ namespace Verwaltungstool.Modelle.Gäste
         public bool GastExistiert(Gast gast)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast WHERE GastID ='{gast.GastID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast WHERE GastID ='{gast.GastID}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
+
+        //Veraltet
+        [Obsolete]
         public List<Gast> AlleGästeAusDatenbank()
         {
             List<int> gästeIDs = new List<int>();
             List<Gast> gäste = new List<Gast>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gästeIDs.Add(result.GetInt32("GastID"));
+                gästeIDs.Add(ergebnis.GetInt32("GastID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in gästeIDs)
             {
@@ -120,13 +123,13 @@ namespace Verwaltungstool.Modelle.Gäste
             List<int> gästeIDs = new List<int>();
             List<Gast> gäste = new List<Gast>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppegast WHERE GruppenID = '{gruppenID}' AND Bezahlt = '0'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppegast WHERE GruppenID = '{gruppenID}' AND Bezahlt = '0'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gästeIDs.Add(result.GetInt32("GastID"));
+                gästeIDs.Add(ergebnis.GetInt32("GastID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in gästeIDs)
             {
@@ -148,23 +151,25 @@ namespace Verwaltungstool.Modelle.Gäste
             int plz = -1;
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT gast.GastID, gast.Name, gast.Nachname, gast.Email, gast.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM gast, gruppegast, adresse, plz WHERE gast.GastID = gruppegast.GastID AND GruppenID = '{gruppenID}' AND Bezahlt = '1' AND gast.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT gast.GastID, gast.Name, gast.Nachname, gast.Email, gast.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM gast, gruppegast, adresse, plz WHERE gast.GastID = gruppegast.GastID AND GruppenID = '{gruppenID}' AND Bezahlt = '1' AND gast.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gastID = result.GetInt32("GastID");
-                name = result.GetString("Name");
-                nachname = result.GetString("Nachname");
-                email = result.GetString("Email");
-                adressID = result.GetInt32("AdressID");
+                //Gast
+                gastID = ergebnis.GetInt32("GastID");
+                name = ergebnis.GetString("Name");
+                nachname = ergebnis.GetString("Nachname");
+                email = ergebnis.GetString("Email");
+                adressID = ergebnis.GetInt32("AdressID");
 
-                hausnummer = result.GetString("Hausnummer");
-                straße = result.GetString("Straße");
-                plz = result.GetInt32("PLZ");
+                //Adresse
+                hausnummer = ergebnis.GetString("Hausnummer");
+                straße = ergebnis.GetString("Straße");
+                plz = ergebnis.GetInt32("PLZ");
 
-                ort = result.GetString("Ort");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return new Gast(gastID, name, nachname, email, new Adresse(adressID, hausnummer, straße, plz, ort));
         }

@@ -30,6 +30,7 @@ namespace Verwaltungstool.Forms.GästeForms
             this._gast = gast;
             this._sender = sender;
 
+            //Die Daten des Gastes werden angezeigt
             this.labelLangerName.Text = this._gast.ToString();
 
             this.labelName.Text = this._gast.Name;
@@ -41,8 +42,9 @@ namespace Verwaltungstool.Forms.GästeForms
             this.labelOrt.Text = this._gast.Adresse.Ort;
         }
 
-        private void buttonZurück_Click(object sender, EventArgs e)
+        private void ButtonZurück_Click(object sender, EventArgs e)
         {
+            //Man kommt zu dem Form zurück woher man gekommen ist
             if (this._sender is ZimmerForm zimmerForm)
             {
                 MainForm.INSTANCE.OpenChildForm(new ZimmerForm(zimmerForm.Zimmer, zimmerForm.Datum));

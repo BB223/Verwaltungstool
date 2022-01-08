@@ -56,22 +56,28 @@ namespace Verwaltungstool.Forms.BuchungForms
         private void ButtonHinzufügen_Click(object sender, EventArgs e)
         {
             if (!this.SindDatenKorregt()) return;
+
             Gast gast;
             int gastID;
+            //Wenn Gast in der Datenbank vorhanden ist
             if ((gastID = MainForm.INSTANCE.GastHandler.GastAusDatenbank(this.textBoxName.Text, this.textBoxNachname.Text, this.textBoxEmail.Text.ToLower())) != -1)
             {
                 gast = MainForm.INSTANCE.GastHandler.GastAusDatenbank(gastID);
             }
+            //Wenn ein neuer Gast hinzugefügt werden muss
             else
             {
                 gast = new Gast(MainForm.INSTANCE.GastHandler.HoleNächsteFreieID(), this.textBoxName.Text, this.textBoxNachname.Text, this.textBoxEmail.Text.ToLower(), null);
             }
+
             Adresse adresse;
             int adressID;
+            //Wenn Adresse in der Datenbank vorhanden ist
             if ((adressID = MainForm.INSTANCE.AdressenHandler.AdresseAusDatenbank(this.textBoxStraße.Text, this.textBoxHausnummer.Text, int.Parse(this.textBoxPLZ.Text), this.textBoxOrt.Text)) != -1)
             {
                 adresse = MainForm.INSTANCE.AdressenHandler.AdresseAusDatenbank(adressID);
             }
+            //Wenn eine neue Adresse erstellt werden muss
             else
             {
                 adresse = new Adresse(MainForm.INSTANCE.AdressenHandler.HoleNächsteFreieID(), this.textBoxHausnummer.Text, this.textBoxStraße.Text, int.Parse(this.textBoxPLZ.Text), this.textBoxOrt.Text);
@@ -80,10 +86,12 @@ namespace Verwaltungstool.Forms.BuchungForms
             gast.Adresse = adresse;
             gast.Speichern();
 
+            //Der erste Gast wir zum Bezahler der Gruppe
             if (this._bezahler == null)
             {
                 this._bezahler = gast;
             }
+            //Alle anderen Gäste werden die Gruppenmitglieder
             else
             {
                 this._gäste.Add(gast);
@@ -91,6 +99,7 @@ namespace Verwaltungstool.Forms.BuchungForms
 
             this.listBoxGruppe.Items.Add(gast);
 
+            //Alle Textboxen werden geleert
             foreach (Control textbox in this.groupBoxGastHinzufügen.Controls)
             {
                 if (textbox is TextBox)
@@ -104,8 +113,10 @@ namespace Verwaltungstool.Forms.BuchungForms
 
         private void TextBoxPLZ_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //Ermöglicht nur Zahlen eingaben
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
+                //Sorgt für den abbruch des Ereignisses
                 e.Handled = true;
             }
         }
@@ -113,30 +124,35 @@ namespace Verwaltungstool.Forms.BuchungForms
         private bool SindDatenKorregt()
         {
             bool korregt = true;
-            foreach (Control textbox in this.groupBoxGastHinzufügen.Controls)
-            {
 
-                if (textbox is TextBox)
+            foreach (Control steuerelemente in this.groupBoxGastHinzufügen.Controls)
+            {
+                if (steuerelemente is TextBox textBox)
                 {
-                    ((Label)textbox.Tag).ForeColor = SystemColors.ControlText;
-                    if (string.IsNullOrEmpty(textbox.Text))
+                    ((Label)textBox.Tag).ForeColor = SystemColors.ControlText;
+
+                    //Wenn Textboxen leer sind wird false zurückgegeben
+                    if (string.IsNullOrEmpty(textBox.Text))
                     {
-                        ((Label)textbox.Tag).ForeColor = Color.Red;
+                        ((Label)textBox.Tag).ForeColor = Color.Red;
                         korregt = false;
                     }
                 }
             }
 
+            //Wenn PLZ nicht 5 Stellen hat wir ebenfalls false zurückgegeben
             if (this.textBoxPLZ.Text.Length != 5)
             {
                 ((Label)this.textBoxPLZ.Tag).ForeColor = Color.Red;
                 korregt = false;
             }
+
             return korregt;
         }
 
-        private void listBoxGruppe_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxGruppe_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Wenn keine Gruppenmitglieder existieren kann man auch keine entfernen
             if (this.listBoxGruppe.Items.Count > 0)
             {
                 this.buttonEntfernen.Enabled = true;
@@ -147,8 +163,9 @@ namespace Verwaltungstool.Forms.BuchungForms
             }
         }
 
-        private void buttonEntfernen_Click(object sender, EventArgs e)
+        private void ButtonEntfernen_Click(object sender, EventArgs e)
         {
+            //Wenn der Bezahler entfernt wird, wird das nächste Gruppenmitglied der Bezahler
             if (((Gast)this.listBoxGruppe.SelectedItem).Equals(this._bezahler))
             {
                 this._bezahler = this._gäste[0];
@@ -158,16 +175,18 @@ namespace Verwaltungstool.Forms.BuchungForms
             {
                 this._gäste.Remove((Gast)this.listBoxGruppe.SelectedItem);
             }
-
             this.listBoxGruppe.Items.RemoveAt(this.listBoxGruppe.SelectedIndex);
+
+            //Wenn keine Gruppenmitglieder mehr existieren kann man die Buchung nicht abschließen
             if (!(this.listBoxGruppe.Items.Count > 0))
             {
                 this.buttonOK.Enabled = false;
             }
         }
 
-        private void textBoxPLZ_Leave(object sender, EventArgs e)
+        private void TextBoxPLZ_Leave(object sender, EventArgs e)
         {
+            //Wenn die PLZ schon in der Datenbank gespeichert ist wir der Ort automatisch vervollständigt
             if (!string.IsNullOrEmpty(this.textBoxPLZ.Text))
             {
                 string ort = MainForm.INSTANCE.AdressenHandler.OrtAusDatenbank(int.Parse(this.textBoxPLZ.Text));

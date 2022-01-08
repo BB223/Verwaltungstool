@@ -35,14 +35,17 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.Zimmer = zimmer;
             this.Datum = datum;
 
+            //Die Zimmernummer die Gebäudenummer und der Zimmertyp wir angezeigt
             this.labelGebäude.Text = $"Gebäude: {this.Zimmer.Gebäude.GebäudeID}";
             this.labelZimmernummer.Text = $"Zimmernummmer: {this.Zimmer.Zimmernummer}";
             this.labelZimmerTyp.Text = this.Zimmer.ZimmerTyp.Equals("EZ") ? "Einzelzimmer" : this.Zimmer.ZimmerTyp.Equals("DZ") ? "Doppelzimmer" : this.Zimmer.ZimmerTyp;
 
+            //Die Zimmereigenschaften werden angezeigt
             _ = this.Zimmer.Fernseher ? this.labelFernseher.Visible = true : this.labelFernseher.Visible = false;
             _ = this.Zimmer.Kühlschrank ? this.labelKühlschrank.Visible = true : this.labelKühlschrank.Visible = false;
             _ = this.Zimmer.Hauptstraße ? this.labelHauptstrasse.Visible = true : this.labelHauptstrasse.Visible = false;
 
+            //Der TerasseBalkonstatus wird angegeben
             switch (this.Zimmer.TerasseBalkon)
             {
                 case "Groß":
@@ -64,15 +67,16 @@ namespace Verwaltungstool.Forms.ZimmerForms
 
             this.Buchung = MainForm.INSTANCE.BuchungHandler.BuchungAusDatenbank(this.Zimmer.ZimmerID, this.Datum);        
 
-            Init();
+            AktualisiereForm();
         }
-        void Init()
+        private void AktualisiereForm()
         { 
+            //Die Zusatzleistungen werden angezeigt
             _ = this.Buchung.PayTV ? this.labelPayTV.Visible = true : this.labelPayTV.Visible = false;
             _ = this.Buchung.Babybett ? this.labelBabybett.Visible = true : this.labelBabybett.Visible = false;
             _ = this.Buchung.Frühstück ? this.labelFruehstueck.Visible = true : this.labelFruehstueck.Visible = false;
 
-
+            //Die Gruppe wird angezeigt
             if (this.Zimmer.IstGebucht(this.Datum))
             {
                 Gruppe gruppe = MainForm.INSTANCE.GruppenHandler.GruppeAusDatenbank(this.Zimmer, this.Datum);
@@ -83,7 +87,8 @@ namespace Verwaltungstool.Forms.ZimmerForms
                 this.buttonZurBuchung.Visible = true;
                 this.pictureBoxBezahler.Visible = true;
             }
-            if (this.Datum.Date > DateTime.Today.Date)
+
+            if (this.Datum.Date < DateTime.Today.Date)
             {
                 this.buttonBuchen.Enabled = false;
             }
@@ -94,23 +99,26 @@ namespace Verwaltungstool.Forms.ZimmerForms
         }
         private void ButtonBuchen_Click(object sender, EventArgs e)
         {
+            //Das BuchenForm wird als Dialog angezeigt
             BuchenForms buchen = new BuchenForms(this.Zimmer, this.Datum);
-            var result = buchen.ShowDialog();
-            if (result == DialogResult.OK)
+            var ergebnis = buchen.ShowDialog();
+            if (ergebnis == DialogResult.OK)
             {
+                //Die Buchung wird als aktuelle Buchung übernommen
                 this.Buchung = buchen.Buchung;
-                Init();
+                AktualisiereForm();
             }
         }
-        private void buttonZurBuchung_Click(object sender, EventArgs e)
+        private void ButtonZurBuchung_Click(object sender, EventArgs e)
         {
             MainForm.INSTANCE.OpenChildForm(new BuchungsForm(this, this.Buchung));
         }
 
-        private void listBoxGruppe_DoubleClick(object sender, EventArgs e)
+        private void ListBoxGruppe_DoubleClick(object sender, EventArgs e)
         {
             if (this.listBoxGruppe.SelectedItem is null) return;
 
+            //Der Gast wird angezeigt
             MainForm.INSTANCE.OpenChildForm(new GastForm(this, (Gast)this.listBoxGruppe.SelectedItem));
         }
     }

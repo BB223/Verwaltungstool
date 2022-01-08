@@ -65,7 +65,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.buttonZurück.TabIndex = 12;
             this.buttonZurück.Text = "Zurück";
             this.buttonZurück.UseVisualStyleBackColor = true;
-            this.buttonZurück.Click += new System.EventHandler(this.buttonZurück_Click);
+            this.buttonZurück.Click += new System.EventHandler(this.ButtonZurück_Click);
             // 
             // groupBoxLeistungen
             // 
@@ -138,7 +138,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.listBoxGruppe.Name = "listBoxGruppe";
             this.listBoxGruppe.Size = new System.Drawing.Size(198, 375);
             this.listBoxGruppe.TabIndex = 0;
-            this.listBoxGruppe.DoubleClick += new System.EventHandler(this.listBoxGruppe_DoubleClick);
+            this.listBoxGruppe.DoubleClick += new System.EventHandler(this.ListBoxGruppe_DoubleClick);
             // 
             // labelGebäude
             // 
@@ -185,7 +185,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.buttonSpeichern.TabIndex = 19;
             this.buttonSpeichern.Text = "Speichern";
             this.buttonSpeichern.UseVisualStyleBackColor = true;
-            this.buttonSpeichern.Click += new System.EventHandler(this.buttonSpeichern_Click);
+            this.buttonSpeichern.Click += new System.EventHandler(this.ButtonSpeichern_Click);
             // 
             // groupBoxZimmer
             // 
@@ -211,7 +211,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.listBoxZimmer.Name = "listBoxZimmer";
             this.listBoxZimmer.Size = new System.Drawing.Size(198, 375);
             this.listBoxZimmer.TabIndex = 0;
-            this.listBoxZimmer.SelectedIndexChanged += new System.EventHandler(this.listBoxZimmer_SelectedIndexChanged);
             // 
             // checkBoxHauptrasse
             // 
@@ -291,7 +290,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.buttonFilter.TabIndex = 20;
             this.buttonFilter.Text = "Filter";
             this.buttonFilter.UseVisualStyleBackColor = true;
-            this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
+            this.buttonFilter.Click += new System.EventHandler(this.ButtonFilter_Click);
             // 
             // BuchungsForm
             // 

@@ -30,30 +30,33 @@ namespace Verwaltungstool.Modelle.Gäste.Gruppe
             int plz = -1;
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT buchung.GruppenID, buchung.PayTV, buchung.Babybett, buchung.Frühstück, zimmer.Fernseher, zimmer.Kühlschrank, zimmer.Hauptstraße, zimmer.Zimmernummer, zimmer.GebäudeID, zimmer.ZimmerTyp, zimmer.TerasseBalkon, adresse.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM buchung, zimmer, gebäude, adresse, plz WHERE buchung.ZimmerID ='{zimmerID}' AND buchung.Datum = '{datum:yyyy-MM-dd}' AND buchung.ZimmerID = zimmer.ZimmerID AND zimmer.GebäudeID = gebäude.GebäudeID AND gebäude.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT buchung.GruppenID, buchung.PayTV, buchung.Babybett, buchung.Frühstück, zimmer.Fernseher, zimmer.Kühlschrank, zimmer.Hauptstraße, zimmer.Zimmernummer, zimmer.GebäudeID, zimmer.ZimmerTyp, zimmer.TerasseBalkon, adresse.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM buchung, zimmer, gebäude, adresse, plz WHERE buchung.ZimmerID ='{zimmerID}' AND buchung.Datum = '{datum:yyyy-MM-dd}' AND buchung.ZimmerID = zimmer.ZimmerID AND zimmer.GebäudeID = gebäude.GebäudeID AND gebäude.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gruppenID = result.GetInt32("GruppenID");
-                payTV = result.GetBoolean("PayTV");
-                babybett = result.GetBoolean("Babybett");
-                frühstück = result.GetBoolean("Frühstück");
+                //Buchung
+                gruppenID = ergebnis.GetInt32("GruppenID");
+                payTV = ergebnis.GetBoolean("PayTV");
+                babybett = ergebnis.GetBoolean("Babybett");
+                frühstück = ergebnis.GetBoolean("Frühstück");
 
-                fernseher = result.GetBoolean("Fernseher");
-                kühlschrank = result.GetBoolean("Kühlschrank");
-                hauptstraße = result.GetBoolean("Hauptstraße");
-                zimmernummer = result.GetString("Zimmernummer");
-                gebäudeID = result.GetInt32("GebäudeID");
-                zimmerTyp = result.GetString("ZimmerTyp");
-                terasseBalkon = result.GetString("TerasseBalkon");
+                //Zimmer
+                fernseher = ergebnis.GetBoolean("Fernseher");
+                kühlschrank = ergebnis.GetBoolean("Kühlschrank");
+                hauptstraße = ergebnis.GetBoolean("Hauptstraße");
+                zimmernummer = ergebnis.GetString("Zimmernummer");
+                gebäudeID = ergebnis.GetInt32("GebäudeID");
+                zimmerTyp = ergebnis.GetString("ZimmerTyp");
+                terasseBalkon = ergebnis.GetString("TerasseBalkon");
 
-                adressID = result.GetInt32("AdressID");
-                hausnummer = result.GetString("Hausnummer");
-                straße = result.GetString("Straße");
-                plz = result.GetInt32("PLZ");
-                ort = result.GetString("Ort");
+                //Adresse
+                adressID = ergebnis.GetInt32("AdressID");
+                hausnummer = ergebnis.GetString("Hausnummer");
+                straße = ergebnis.GetString("Straße");
+                plz = ergebnis.GetInt32("PLZ");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return new Buchung(MainForm.INSTANCE.GruppenHandler.GruppeAusDatenbank(gruppenID),new Ort.Zimmer(zimmerID,fernseher,kühlschrank,hauptstraße,zimmernummer,new Ort.Gebäude(gebäudeID,new Ort.Adresse(adressID,hausnummer,straße,plz,ort)),zimmerTyp,terasseBalkon), payTV, babybett, frühstück, datum);
         }
@@ -71,36 +74,39 @@ namespace Verwaltungstool.Modelle.Gäste.Gruppe
         public bool BuchungExistiert(Buchung buchung)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM buchung WHERE ZimmerID ='{buchung.Zimmer.ZimmerID}' AND Datum = '{buchung.Datum:yyyy-MM-dd}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM buchung WHERE ZimmerID ='{buchung.Zimmer.ZimmerID}' AND Datum = '{buchung.Datum:yyyy-MM-dd}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
         public bool BuchungExistiert(Gruppe gruppe, DateTime datum)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM buchung WHERE GruppenID ='{gruppe.GruppenID}' AND Datum = '{datum:yyyy-MM-dd}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM buchung WHERE GruppenID ='{gruppe.GruppenID}' AND Datum = '{datum:yyyy-MM-dd}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
+
+        //Veraltet
+        [Obsolete]
         public List<Buchung> AlleAktuelleBuchungAusDatenbank()
         {
             List<(int, DateTime)> buchungIDs = new List<(int, DateTime)>();
             List<Buchung> buchungen = new List<Buchung>();
             List<Buchung> zuEntfernen = new List<Buchung>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM buchung WHERE Datum = '{DateTime.Today:yyyy-MM-dd}' OR Datum = '{DateTime.Today.AddDays(-1):yyyy-MM-dd}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM buchung WHERE Datum = '{DateTime.Today:yyyy-MM-dd}' OR Datum = '{DateTime.Today.AddDays(-1):yyyy-MM-dd}'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                buchungIDs.Add((result.GetInt32("ZimmerID"), result.GetDateTime("Datum")));
+                buchungIDs.Add((ergebnis.GetInt32("ZimmerID"), ergebnis.GetDateTime("Datum")));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in buchungIDs)
             {

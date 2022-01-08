@@ -13,16 +13,16 @@ namespace Verwaltungstool.Modelle.Ort
         {
             int adressID = -1;
             int tmp;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM adresse");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM adresse");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                if (adressID < (tmp = result.GetInt32("AdressID")))
+                if (adressID < (tmp = ergebnis.GetInt32("AdressID")))
                 {
                     adressID = tmp;
                 }
             }
-            result.Close();
+            ergebnis.Close();
 
             return adressID + 1;
         }
@@ -30,13 +30,13 @@ namespace Verwaltungstool.Modelle.Ort
         {
             int adressID = -1;
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT AdressID FROM adresse, plz WHERE adresse.Straße ='{straße}' AND adresse.Hausnummer ='{hausnummer}' AND adresse.PLZ ='{plz}' AND plz.Ort ='{ort}' AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT AdressID FROM adresse, plz WHERE adresse.Straße ='{straße}' AND adresse.Hausnummer ='{hausnummer}' AND adresse.PLZ ='{plz}' AND plz.Ort ='{ort}' AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                adressID = result.GetInt32("AdressID");
+                adressID = ergebnis.GetInt32("AdressID");
             }
-            result.Close();
+            ergebnis.Close();
 
             return adressID;
         }
@@ -47,17 +47,17 @@ namespace Verwaltungstool.Modelle.Ort
             int plz = -1;
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM adresse, plz WHERE AdressID ='{adressID}' AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM adresse, plz WHERE AdressID ='{adressID}' AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                hausnummer = result.GetString("Hausnummer");
-                straße = result.GetString("Straße");
-                plz = result.GetInt32("PLZ");
+                hausnummer = ergebnis.GetString("Hausnummer");
+                straße = ergebnis.GetString("Straße");
+                plz = ergebnis.GetInt32("PLZ");
 
-                ort = result.GetString("Ort");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return new Adresse(adressID, hausnummer, straße, plz, ort);
         }
@@ -73,10 +73,10 @@ namespace Verwaltungstool.Modelle.Ort
         public bool AdresseExistiert(Adresse adresse)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM adresse WHERE AdressID ='{adresse.AdressID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM adresse WHERE AdressID ='{adresse.AdressID}'");
 
-            if(result.Read()) existiert = true;
-            result.Close();
+            if(ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
@@ -90,10 +90,10 @@ namespace Verwaltungstool.Modelle.Ort
         private bool OrtExistiert(Adresse adresse)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM plz WHERE PLZ ='{adresse.PLZ}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM plz WHERE PLZ ='{adresse.PLZ}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
@@ -101,13 +101,13 @@ namespace Verwaltungstool.Modelle.Ort
         {
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT Ort FROM plz WHERE plz ='{plz}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT Ort FROM plz WHERE plz ='{plz}'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                ort = result.GetString("Ort");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return ort;
         }

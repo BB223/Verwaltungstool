@@ -25,28 +25,32 @@ namespace Verwaltungstool.Modelle.Ort
             int plz = -1;
             string ort = "";
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.Fernseher, zimmer.Kühlschrank, zimmer.Hauptstraße, zimmer.Zimmernummer, zimmer.GebäudeID, zimmer.ZimmerTyp, zimmer.TerasseBalkon, adresse.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM zimmer, gebäude, adresse, plz WHERE ZimmerID ='{zimmerID}' AND zimmer.GebäudeID = gebäude.GebäudeID AND gebäude.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.Fernseher, zimmer.Kühlschrank, zimmer.Hauptstraße, zimmer.Zimmernummer, zimmer.GebäudeID, zimmer.ZimmerTyp, zimmer.TerasseBalkon, adresse.AdressID, adresse.Hausnummer, adresse.Straße, adresse.PLZ, plz.Ort FROM zimmer, gebäude, adresse, plz WHERE ZimmerID ='{zimmerID}' AND zimmer.GebäudeID = gebäude.GebäudeID AND gebäude.AdressID = adresse.AdressID AND adresse.PLZ = plz.PLZ");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                fernseher = result.GetBoolean("Fernseher");
-                kühlschrank = result.GetBoolean("Kühlschrank");
-                hauptstraße = result.GetBoolean("Hauptstraße");
-                zimmernummer = result.GetString("Zimmernummer");
-                gebäudeID = result.GetInt32("GebäudeID");
-                zimmerTyp = result.GetString("ZimmerTyp");
-                terasseBalkon = result.GetString("TerasseBalkon");
+                //Zimmer
+                fernseher = ergebnis.GetBoolean("Fernseher");
+                kühlschrank = ergebnis.GetBoolean("Kühlschrank");
+                hauptstraße = ergebnis.GetBoolean("Hauptstraße");
+                zimmernummer = ergebnis.GetString("Zimmernummer");
+                gebäudeID = ergebnis.GetInt32("GebäudeID");
+                zimmerTyp = ergebnis.GetString("ZimmerTyp");
+                terasseBalkon = ergebnis.GetString("TerasseBalkon");
 
-                adressID = result.GetInt32("AdressID");
-                hausnummer = result.GetString("Hausnummer");
-                straße = result.GetString("Straße");
-                plz = result.GetInt32("PLZ");
-                ort = result.GetString("Ort");
+                //Adresse
+                adressID = ergebnis.GetInt32("AdressID");
+                hausnummer = ergebnis.GetString("Hausnummer");
+                straße = ergebnis.GetString("Straße");
+                plz = ergebnis.GetInt32("PLZ");
+                ort = ergebnis.GetString("Ort");
             }
-            result.Close();
+            ergebnis.Close();
 
             return new Zimmer(zimmerID, fernseher, kühlschrank, hauptstraße, zimmernummer, new Gebäude(gebäudeID, new Adresse(adressID, hausnummer, straße, plz, ort)), zimmerTyp, terasseBalkon);
         }
+
+        //Schnittstelle für zukünftige Funktion
         public void ZimmerZurDatenbank(Zimmer zimmer)
         {
             zimmer.Gebäude.Speichern();
@@ -63,11 +67,11 @@ namespace Verwaltungstool.Modelle.Ort
         public bool ZimmerExistiert(Zimmer zimmer)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE ZimmerID ='{zimmer.ZimmerID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE ZimmerID ='{zimmer.ZimmerID}'");
 
-            if (result.Read()) 
+            if (ergebnis.Read()) 
                 existiert = true;
-            result.Close();
+            ergebnis.Close();
 
             return existiert;
         }
@@ -76,13 +80,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmerIDs.Add(result.GetInt32("ZimmerID"));
+                zimmerIDs.Add(ergebnis.GetInt32("ZimmerID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in zimmerIDs)
             {
@@ -96,13 +100,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = '{gebäude.GebäudeID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = '{gebäude.GebäudeID}'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmerIDs.Add(result.GetInt32("ZimmerID"));
+                zimmerIDs.Add(ergebnis.GetInt32("ZimmerID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in zimmerIDs)
             {
@@ -116,13 +120,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = {gebäude.GebäudeID} AND Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = {gebäude.GebäudeID} AND Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmerIDs.Add(result.GetInt32("ZimmerID"));
+                zimmerIDs.Add(ergebnis.GetInt32("ZimmerID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in zimmerIDs)
             {
@@ -136,13 +140,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}'");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmerIDs.Add(result.GetInt32("ZimmerID"));
+                zimmerIDs.Add(ergebnis.GetInt32("ZimmerID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in zimmerIDs)
             {
@@ -155,36 +159,36 @@ namespace Verwaltungstool.Modelle.Ort
         {
             bool gebucht = false;
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT GruppenID FROM buchung WHERE ZimmerID ='{zimmer.ZimmerID}' AND Datum='{datum:yyyy-MM-dd}'");
-            if (result.Read()) 
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT GruppenID FROM buchung WHERE ZimmerID ='{zimmer.ZimmerID}' AND Datum='{datum:yyyy-MM-dd}'");
+            if (ergebnis.Read()) 
                 gebucht = true;
-            result.Close();
+            ergebnis.Close();
 
             return gebucht;
         }
         public List<string> AlleZimmertypenAusDatenbank()
         {
             List<string> zimmertypen = new List<string>();
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT ZimmerTyp FROM zimmertyp");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT ZimmerTyp FROM zimmertyp");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmertypen.Add(result.GetString("ZimmerTyp"));
+                zimmertypen.Add(ergebnis.GetString("ZimmerTyp"));
             }
-            result.Close();
+            ergebnis.Close();
 
             return zimmertypen;
         }
         public List<string> AlleTerasseBalkonAusDatenbank()
         {
             List<string> terasseBalkon = new List<string>();
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT TerasseBalkon FROM terassebalkon");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT TerasseBalkon FROM terassebalkon");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                terasseBalkon.Add(result.GetString("TerasseBalkon"));
+                terasseBalkon.Add(ergebnis.GetString("TerasseBalkon"));
             }
-            result.Close();
+            ergebnis.Close();
 
             return terasseBalkon;
         }
@@ -193,13 +197,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR  buchung.Datum IS NULL GROUP BY zimmer.ZimmerID");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR  buchung.Datum IS NULL GROUP BY zimmer.ZimmerID");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmerIDs.Add(result.GetInt32("ZimmerID"));
+                zimmerIDs.Add(ergebnis.GetInt32("ZimmerID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in zimmerIDs)
             {
@@ -213,13 +217,13 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}' AND (NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR buchung.Datum IS NULL) GROUP BY zimmer.ZimmerID");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}' AND (NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR buchung.Datum IS NULL) GROUP BY zimmer.ZimmerID");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                zimmerIDs.Add(result.GetInt32("ZimmerID"));
+                zimmerIDs.Add(ergebnis.GetInt32("ZimmerID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in zimmerIDs)
             {

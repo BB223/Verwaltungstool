@@ -218,7 +218,7 @@
             this.textBoxPLZ.TabIndex = 12;
             this.textBoxPLZ.Tag = this.labelPLZ;
             this.textBoxPLZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPLZ_KeyPress);
-            this.textBoxPLZ.Leave += new System.EventHandler(this.textBoxPLZ_Leave);
+            this.textBoxPLZ.Leave += new System.EventHandler(this.TextBoxPLZ_Leave);
             // 
             // textBoxStraße
             // 
@@ -320,7 +320,7 @@
             this.listBoxGruppe.Name = "listBoxGruppe";
             this.listBoxGruppe.Size = new System.Drawing.Size(194, 225);
             this.listBoxGruppe.TabIndex = 0;
-            this.listBoxGruppe.SelectedIndexChanged += new System.EventHandler(this.listBoxGruppe_SelectedIndexChanged);
+            this.listBoxGruppe.SelectedIndexChanged += new System.EventHandler(this.ListBoxGruppe_SelectedIndexChanged);
             // 
             // buttonEntfernen
             // 
@@ -333,7 +333,7 @@
             this.buttonEntfernen.TabIndex = 23;
             this.buttonEntfernen.Text = "Entfernen <-";
             this.buttonEntfernen.UseVisualStyleBackColor = true;
-            this.buttonEntfernen.Click += new System.EventHandler(this.buttonEntfernen_Click);
+            this.buttonEntfernen.Click += new System.EventHandler(this.ButtonEntfernen_Click);
             // 
             // BuchenForms
             // 

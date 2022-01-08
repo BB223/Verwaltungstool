@@ -171,7 +171,7 @@
             this.listBoxGruppe.Name = "listBoxGruppe";
             this.listBoxGruppe.Size = new System.Drawing.Size(272, 364);
             this.listBoxGruppe.TabIndex = 11;
-            this.listBoxGruppe.DoubleClick += new System.EventHandler(this.listBoxGruppe_DoubleClick);
+            this.listBoxGruppe.DoubleClick += new System.EventHandler(this.ListBoxGruppe_DoubleClick);
             // 
             // groupBoxGruppe
             // 
@@ -253,7 +253,7 @@
             this.buttonZurBuchung.Text = "Zur Buchung";
             this.buttonZurBuchung.UseVisualStyleBackColor = true;
             this.buttonZurBuchung.Visible = false;
-            this.buttonZurBuchung.Click += new System.EventHandler(this.buttonZurBuchung_Click);
+            this.buttonZurBuchung.Click += new System.EventHandler(this.ButtonZurBuchung_Click);
             // 
             // pictureBoxBezahler
             // 

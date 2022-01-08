@@ -45,10 +45,11 @@ namespace Willeke
             this.ZimmerHandler = new ZimmerHandler();
             this.BuchungHandler = new BuchungHandler();
 
-
+            //Die Verbindung zur Datenbank wird hergestellt
             this.SQLDatabase = new SQLDatabase("localhost", "root", "", "hotel_willeke");
             this.SQLDatabase.Verbinden();
         }
+        //Quelle: https://github.com/PlaySkyHD/Lernhelfer-Client/blob/master/Lehrnhelfer-Client/Forms/MainForm.cs
         public void OpenChildForm(Form childForm)
         {
             if (this._activeForm != null) this._activeForm.Close();
@@ -67,6 +68,7 @@ namespace Willeke
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //Die Zimmerübersicht wird als erstes angezeigt
             this.OpenChildForm(new ZimmerÜbersicht());
         }
     }

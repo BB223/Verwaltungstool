@@ -150,7 +150,7 @@ namespace Verwaltungstool.Forms.GästeForms
             this.buttonZurück.TabIndex = 7;
             this.buttonZurück.Text = "Zurück";
             this.buttonZurück.UseVisualStyleBackColor = true;
-            this.buttonZurück.Click += new System.EventHandler(this.buttonZurück_Click);
+            this.buttonZurück.Click += new System.EventHandler(this.ButtonZurück_Click);
             // 
             // GastForm
             // 

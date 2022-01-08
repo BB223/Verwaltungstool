@@ -14,16 +14,16 @@ namespace Verwaltungstool.Modelle.Gäste.Gruppe
         {
             int gruppenID = 0;
             int tmp;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                if (gruppenID < (tmp = result.GetInt32("GruppenID")))
+                if (gruppenID < (tmp = ergebnis.GetInt32("GruppenID")))
                 {
                     gruppenID = tmp;
                 }
             }
-            result.Close();
+            ergebnis.Close();
 
             return gruppenID + 1;
         }
@@ -47,35 +47,38 @@ namespace Verwaltungstool.Modelle.Gäste.Gruppe
         public bool GruppeGastExistiert(Gruppe gruppe, Gast gast)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppegast WHERE GruppenID ='{gruppe.GruppenID}' AND GastID = '{gast.GastID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppegast WHERE GruppenID ='{gruppe.GruppenID}' AND GastID = '{gast.GastID}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
         public bool GruppeExistiert(Gruppe gruppe)
         {
             bool existiert = false;
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe WHERE GruppenID ='{gruppe.GruppenID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe WHERE GruppenID ='{gruppe.GruppenID}'");
 
-            if (result.Read()) existiert = true;
-            result.Close();
+            if (ergebnis.Read()) existiert = true;
+            ergebnis.Close();
 
             return existiert;
         }
+
+        //Veraltet
+        [Obsolete]
         public List<Gruppe> AlleGruppenAusDatenbank()
         {
             List<int> gruppenIDs = new List<int>();
             List<Gruppe> gruppen = new List<Gruppe>();
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe");
 
-            while (result.Read())
+            while (ergebnis.Read())
             {
-                gruppenIDs.Add(result.GetInt32("GruppenID"));
+                gruppenIDs.Add(ergebnis.GetInt32("GruppenID"));
             }
-            result.Close();
+            ergebnis.Close();
 
             foreach (var ID in gruppenIDs)
             {
@@ -88,12 +91,12 @@ namespace Verwaltungstool.Modelle.Gäste.Gruppe
         {
             int gruppenID = -1;
 
-            var result = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT GruppenID FROM buchung WHERE ZimmerID ='{zimmer.ZimmerID}' AND Datum='{datum:yyyy-MM-dd}'");
-            while (result.Read())
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT GruppenID FROM buchung WHERE ZimmerID ='{zimmer.ZimmerID}' AND Datum='{datum:yyyy-MM-dd}'");
+            while (ergebnis.Read())
             {
-                gruppenID = result.GetInt32("GruppenID");
+                gruppenID = ergebnis.GetInt32("GruppenID");
             }
-            result.Close();
+            ergebnis.Close();
 
             return this.GruppeAusDatenbank(gruppenID);
         }

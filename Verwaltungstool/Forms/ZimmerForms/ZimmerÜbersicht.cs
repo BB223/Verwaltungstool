@@ -29,20 +29,22 @@ namespace Verwaltungstool.Forms.ZimmerForms
 
             this._gebäude = MainForm.INSTANCE.GebäudeHandler.AlleGebäudeAusDatenbank();
 
+            //Der Gebäudefilter wir aufgefüllt
             this.comboBoxGebäude.Items.Add("");
-
             foreach (var gebäude in this._gebäude)
             {
                 this.comboBoxGebäude.Items.Add(gebäude);
             }
             this.comboBoxGebäude.SelectedIndex = 0;
 
+            //Der TerasseBalkonfilter wir aufgefüllt
             foreach (var terassebalkon in MainForm.INSTANCE.ZimmerHandler.AlleTerasseBalkonAusDatenbank())
             {
                 this.comboBoxTerrasseBalkon.Items.Add(terassebalkon);
             }
             this.comboBoxTerrasseBalkon.SelectedIndex = 0;
 
+            //Der Zimmertypfilter wir aufgefüllt
             foreach (var zimmertyp in MainForm.INSTANCE.ZimmerHandler.AlleZimmertypenAusDatenbank())
             {
                 this.comboBoxZimmerTyp.Items.Add(zimmertyp);
@@ -82,6 +84,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
 
             this.flowLayoutPanelZimmer.Controls.Clear();
 
+            //Die Zimmer werden in Form von Knöpfen angezeigt
             foreach (var zimmer in this._zimmer)
             {
                 this.flowLayoutPanelZimmer.Controls.Add(new Button { Tag = zimmer, FlatStyle = FlatStyle.Flat, Text = $"{zimmer.Zimmernummer}\n{zimmer.ZimmerTyp}\nGebäude: {zimmer.Gebäude.GebäudeID}", AutoSize = true, Dock = DockStyle.Top, BackColor = zimmer.IstGebucht(this.dateTimePickerDatum.Value) ? Color.Red : Color.Green });
@@ -89,6 +92,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
 
             foreach (Button button in this.flowLayoutPanelZimmer.Controls)
             {
+                //Jedem Knopf wird das Clickeregniss hinzugefügt
                 button.Click += Button_Click;
             }
         }
@@ -102,6 +106,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
         }
         private void ButtonZurücksetzen_Click(object sender, EventArgs e)
         {
+            //Die Filter werden zurückgesetzt
             this.dateTimePickerDatum.Value = DateTime.Now;
             this.comboBoxGebäude.SelectedIndex = 0;
             this._filter = false;
@@ -113,7 +118,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
 
             AktualisiereZimmer();
         }
-        private void dateTimePickerDatum_ValueChanged(object sender, EventArgs e)
+        private void DateTimePickerDatum_ValueChanged(object sender, EventArgs e)
         {
             foreach (Button button in this.flowLayoutPanelZimmer.Controls)
             {
@@ -123,6 +128,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
 
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
+            //Die Filteroptionen werden angezeigt oder nicht
             this._filter = !this._filter;
             if (!this._filter)
             {
