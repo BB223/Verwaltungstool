@@ -80,7 +80,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer ORDER BY ZimmerID ASC");
 
             while (ergebnis.Read())
             {
@@ -100,7 +100,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = '{gebäude.GebäudeID}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = '{gebäude.GebäudeID}' ORDER BY ZimmerID ASC");
 
             while (ergebnis.Read())
             {
@@ -120,7 +120,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = {gebäude.GebäudeID} AND Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE GebäudeID = {gebäude.GebäudeID} AND Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}' ORDER BY ZimmerID ASC");
 
             while (ergebnis.Read())
             {
@@ -140,7 +140,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM zimmer WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}' ORDER BY ZimmerID ASC");
 
             while (ergebnis.Read())
             {
@@ -197,7 +197,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR  buchung.Datum IS NULL GROUP BY zimmer.ZimmerID");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR  buchung.Datum IS NULL GROUP BY zimmer.ZimmerID ORDER BY zimmer.ZimmerID ASC");
 
             while (ergebnis.Read())
             {
@@ -217,7 +217,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> zimmerIDs = new List<int>();
             List<Zimmer> zimmer = new List<Zimmer>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}' AND (NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR buchung.Datum IS NULL) GROUP BY zimmer.ZimmerID");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT zimmer.ZimmerID FROM zimmer LEFT OUTER JOIN buchung ON zimmer.ZimmerID = buchung.ZimmerID WHERE Fernseher = {fernseher} AND Kühlschrank = {kühlschrank} AND Hauptstraße = {hauptstraße} AND ZimmerTyp = '{zimmerTyp}' AND TerasseBalkon = '{terasseBalkon}' AND (NOT buchung.Datum = '{DateTime.Today:yyyy-MM-dd}' OR buchung.Datum IS NULL) GROUP BY zimmer.ZimmerID ORDER BY zimmer.ZimmerID ASC");
 
             while (ergebnis.Read())
             {

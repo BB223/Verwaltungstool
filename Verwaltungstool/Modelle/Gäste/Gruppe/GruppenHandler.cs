@@ -72,7 +72,7 @@ namespace Verwaltungstool.Modelle.Gäste.Gruppe
             List<int> gruppenIDs = new List<int>();
             List<Gruppe> gruppen = new List<Gruppe>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppe ORDER BY GruppenID ASC");
 
             while (ergebnis.Read())
             {

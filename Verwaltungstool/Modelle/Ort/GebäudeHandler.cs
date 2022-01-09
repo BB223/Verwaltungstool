@@ -61,7 +61,7 @@ namespace Verwaltungstool.Modelle.Ort
             List<int> gebäudeIDs = new List<int>();
             List<Gebäude> gebäude = new List<Gebäude>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gebäude");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gebäude ORDER BY GebäudeID ASC");
 
             while (ergebnis.Read())
             {

@@ -103,7 +103,7 @@ namespace Verwaltungstool.Modelle.Gäste
             List<int> gästeIDs = new List<int>();
             List<Gast> gäste = new List<Gast>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gast ORDER BY gast.GastID ASC");
 
             while (ergebnis.Read())
             {
@@ -123,7 +123,7 @@ namespace Verwaltungstool.Modelle.Gäste
             List<int> gästeIDs = new List<int>();
             List<Gast> gäste = new List<Gast>();
 
-            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppegast WHERE GruppenID = '{gruppenID}' AND Bezahlt = '0'");
+            var ergebnis = MainForm.INSTANCE.SQLDatabase.Lesen($"SELECT * FROM gruppegast WHERE GruppenID = '{gruppenID}' AND Bezahlt = '0' ORDER BY GastID ASC");
 
             while (ergebnis.Read())
             {
