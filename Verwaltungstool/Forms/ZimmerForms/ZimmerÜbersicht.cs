@@ -120,9 +120,12 @@ namespace Verwaltungstool.Forms.ZimmerForms
         }
         private void DateTimePickerDatum_ValueChanged(object sender, EventArgs e)
         {
+            bool istGebucht;
             foreach (Button button in this.flowLayoutPanelZimmer.Controls)
             {
-                button.BackColor = ((Zimmer)button.Tag).IstGebucht(this.dateTimePickerDatum.Value) ? Color.Red : Color.Green;
+                istGebucht = ((Zimmer)button.Tag).IstGebucht(this.dateTimePickerDatum.Value);
+                button.BackColor = !istGebucht ? this.dateTimePickerDatum.Value.Date < DateTime.Today.Date ? Color.Gray : Color.Green : Color.Red;
+                button.Enabled = this.dateTimePickerDatum.Value >= DateTime.Today.Date || istGebucht;
             }
         }
 

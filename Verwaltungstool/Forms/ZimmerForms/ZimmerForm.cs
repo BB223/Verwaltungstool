@@ -87,11 +87,6 @@ namespace Verwaltungstool.Forms.ZimmerForms
                 this.buttonZurBuchung.Visible = true;
                 this.pictureBoxBezahler.Visible = true;
             }
-
-            if (this.Datum.Date < DateTime.Today.Date)
-            {
-                this.buttonBuchen.Enabled = false;
-            }
         }
         private void ButtonZurück_Click(object sender, EventArgs e)
         {
