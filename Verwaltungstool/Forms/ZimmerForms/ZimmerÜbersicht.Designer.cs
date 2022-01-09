@@ -44,7 +44,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             // dateTimePickerDatum
             // 
             this.dateTimePickerDatum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePickerDatum.Location = new System.Drawing.Point(583, 12);
+            this.dateTimePickerDatum.Location = new System.Drawing.Point(724, 12);
             this.dateTimePickerDatum.Name = "dateTimePickerDatum";
             this.dateTimePickerDatum.Size = new System.Drawing.Size(205, 22);
             this.dateTimePickerDatum.TabIndex = 0;
@@ -56,7 +56,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.comboBoxGebäude.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGebäude.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxGebäude.FormattingEnabled = true;
-            this.comboBoxGebäude.Location = new System.Drawing.Point(583, 41);
+            this.comboBoxGebäude.Location = new System.Drawing.Point(724, 41);
             this.comboBoxGebäude.Name = "comboBoxGebäude";
             this.comboBoxGebäude.Size = new System.Drawing.Size(205, 22);
             this.comboBoxGebäude.TabIndex = 1;
@@ -71,14 +71,14 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.flowLayoutPanelZimmer.BackColor = System.Drawing.SystemColors.Control;
             this.flowLayoutPanelZimmer.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanelZimmer.Name = "flowLayoutPanelZimmer";
-            this.flowLayoutPanelZimmer.Size = new System.Drawing.Size(565, 460);
+            this.flowLayoutPanelZimmer.Size = new System.Drawing.Size(706, 472);
             this.flowLayoutPanelZimmer.TabIndex = 2;
             // 
             // buttonZurücksetzen
             // 
             this.buttonZurücksetzen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonZurücksetzen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZurücksetzen.Location = new System.Drawing.Point(692, 447);
+            this.buttonZurücksetzen.Location = new System.Drawing.Point(833, 459);
             this.buttonZurücksetzen.Name = "buttonZurücksetzen";
             this.buttonZurücksetzen.Size = new System.Drawing.Size(96, 25);
             this.buttonZurücksetzen.TabIndex = 3;
@@ -90,7 +90,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             // 
             this.buttonFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFilter.Location = new System.Drawing.Point(583, 114);
+            this.buttonFilter.Location = new System.Drawing.Point(724, 114);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonFilter.TabIndex = 4;
@@ -104,7 +104,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.comboBoxZimmerTyp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxZimmerTyp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxZimmerTyp.FormattingEnabled = true;
-            this.comboBoxZimmerTyp.Location = new System.Drawing.Point(583, 143);
+            this.comboBoxZimmerTyp.Location = new System.Drawing.Point(724, 143);
             this.comboBoxZimmerTyp.Name = "comboBoxZimmerTyp";
             this.comboBoxZimmerTyp.Size = new System.Drawing.Size(121, 22);
             this.comboBoxZimmerTyp.TabIndex = 5;
@@ -117,7 +117,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.comboBoxTerrasseBalkon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTerrasseBalkon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTerrasseBalkon.FormattingEnabled = true;
-            this.comboBoxTerrasseBalkon.Location = new System.Drawing.Point(583, 246);
+            this.comboBoxTerrasseBalkon.Location = new System.Drawing.Point(724, 246);
             this.comboBoxTerrasseBalkon.Name = "comboBoxTerrasseBalkon";
             this.comboBoxTerrasseBalkon.Size = new System.Drawing.Size(121, 22);
             this.comboBoxTerrasseBalkon.TabIndex = 6;
@@ -129,7 +129,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.checkBoxKühlschrank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxKühlschrank.AutoSize = true;
             this.checkBoxKühlschrank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxKühlschrank.Location = new System.Drawing.Point(586, 171);
+            this.checkBoxKühlschrank.Location = new System.Drawing.Point(727, 171);
             this.checkBoxKühlschrank.Name = "checkBoxKühlschrank";
             this.checkBoxKühlschrank.Size = new System.Drawing.Size(89, 18);
             this.checkBoxKühlschrank.TabIndex = 7;
@@ -143,7 +143,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.checkBoxFernseher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxFernseher.AutoSize = true;
             this.checkBoxFernseher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxFernseher.Location = new System.Drawing.Point(586, 195);
+            this.checkBoxFernseher.Location = new System.Drawing.Point(727, 195);
             this.checkBoxFernseher.Name = "checkBoxFernseher";
             this.checkBoxFernseher.Size = new System.Drawing.Size(78, 18);
             this.checkBoxFernseher.TabIndex = 8;
@@ -157,7 +157,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             this.checkBoxHauptrasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxHauptrasse.AutoSize = true;
             this.checkBoxHauptrasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHauptrasse.Location = new System.Drawing.Point(586, 219);
+            this.checkBoxHauptrasse.Location = new System.Drawing.Point(727, 219);
             this.checkBoxHauptrasse.Name = "checkBoxHauptrasse";
             this.checkBoxHauptrasse.Size = new System.Drawing.Size(107, 18);
             this.checkBoxHauptrasse.TabIndex = 9;
@@ -170,7 +170,7 @@ namespace Verwaltungstool.Forms.ZimmerForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 485);
+            this.ClientSize = new System.Drawing.Size(941, 497);
             this.Controls.Add(this.checkBoxHauptrasse);
             this.Controls.Add(this.checkBoxFernseher);
             this.Controls.Add(this.checkBoxKühlschrank);

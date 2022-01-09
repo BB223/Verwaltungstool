@@ -151,7 +151,7 @@
             this.buttonZurück.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonZurück.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonZurück.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonZurück.Location = new System.Drawing.Point(634, 449);
+            this.buttonZurück.Location = new System.Drawing.Point(605, 498);
             this.buttonZurück.Name = "buttonZurück";
             this.buttonZurück.Size = new System.Drawing.Size(75, 25);
             this.buttonZurück.TabIndex = 6;
@@ -169,7 +169,7 @@
             this.listBoxGruppe.ItemHeight = 19;
             this.listBoxGruppe.Location = new System.Drawing.Point(3, 23);
             this.listBoxGruppe.Name = "listBoxGruppe";
-            this.listBoxGruppe.Size = new System.Drawing.Size(272, 364);
+            this.listBoxGruppe.Size = new System.Drawing.Size(272, 445);
             this.listBoxGruppe.TabIndex = 11;
             this.listBoxGruppe.DoubleClick += new System.EventHandler(this.ListBoxGruppe_DoubleClick);
             // 
@@ -181,7 +181,7 @@
             this.groupBoxGruppe.Font = new System.Drawing.Font("Calibri", 12F);
             this.groupBoxGruppe.Location = new System.Drawing.Point(170, 53);
             this.groupBoxGruppe.Name = "groupBoxGruppe";
-            this.groupBoxGruppe.Size = new System.Drawing.Size(278, 390);
+            this.groupBoxGruppe.Size = new System.Drawing.Size(278, 471);
             this.groupBoxGruppe.TabIndex = 12;
             this.groupBoxGruppe.TabStop = false;
             this.groupBoxGruppe.Text = "Gäste";
@@ -233,7 +233,7 @@
             // 
             this.buttonBuchen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonBuchen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBuchen.Location = new System.Drawing.Point(6, 450);
+            this.buttonBuchen.Location = new System.Drawing.Point(6, 499);
             this.buttonBuchen.Name = "buttonBuchen";
             this.buttonBuchen.Size = new System.Drawing.Size(75, 25);
             this.buttonBuchen.TabIndex = 14;
@@ -246,7 +246,7 @@
             this.buttonZurBuchung.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonZurBuchung.AutoSize = true;
             this.buttonZurBuchung.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZurBuchung.Location = new System.Drawing.Point(6, 417);
+            this.buttonZurBuchung.Location = new System.Drawing.Point(6, 466);
             this.buttonZurBuchung.Name = "buttonZurBuchung";
             this.buttonZurBuchung.Size = new System.Drawing.Size(87, 27);
             this.buttonZurBuchung.TabIndex = 15;
@@ -271,7 +271,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 484);
+            this.ClientSize = new System.Drawing.Size(692, 533);
             this.Controls.Add(this.pictureBoxBezahler);
             this.Controls.Add(this.buttonZurBuchung);
             this.Controls.Add(this.buttonBuchen);

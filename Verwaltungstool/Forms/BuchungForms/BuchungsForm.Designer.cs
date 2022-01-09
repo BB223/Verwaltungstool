@@ -59,7 +59,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.buttonZurück.AutoSize = true;
             this.buttonZurück.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonZurück.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonZurück.Location = new System.Drawing.Point(592, 443);
+            this.buttonZurück.Location = new System.Drawing.Point(512, 388);
             this.buttonZurück.Name = "buttonZurück";
             this.buttonZurück.Size = new System.Drawing.Size(75, 30);
             this.buttonZurück.TabIndex = 12;
@@ -69,7 +69,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             // groupBoxLeistungen
             // 
-            this.groupBoxLeistungen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxLeistungen.Controls.Add(this.checkBoxFrühstück);
             this.groupBoxLeistungen.Controls.Add(this.checkBoxBabybett);
             this.groupBoxLeistungen.Controls.Add(this.checkBoxPayTV);
@@ -122,7 +121,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.groupBoxGruppe.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxGruppe.Location = new System.Drawing.Point(10, 72);
             this.groupBoxGruppe.Name = "groupBoxGruppe";
-            this.groupBoxGruppe.Size = new System.Drawing.Size(204, 401);
+            this.groupBoxGruppe.Size = new System.Drawing.Size(204, 346);
             this.groupBoxGruppe.TabIndex = 15;
             this.groupBoxGruppe.TabStop = false;
             this.groupBoxGruppe.Text = "Gruppe";
@@ -136,7 +135,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.listBoxGruppe.ItemHeight = 19;
             this.listBoxGruppe.Location = new System.Drawing.Point(3, 23);
             this.listBoxGruppe.Name = "listBoxGruppe";
-            this.listBoxGruppe.Size = new System.Drawing.Size(198, 375);
+            this.listBoxGruppe.Size = new System.Drawing.Size(198, 320);
             this.listBoxGruppe.TabIndex = 0;
             this.listBoxGruppe.DoubleClick += new System.EventHandler(this.ListBoxGruppe_DoubleClick);
             // 
@@ -179,7 +178,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.buttonSpeichern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSpeichern.AutoSize = true;
             this.buttonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSpeichern.Location = new System.Drawing.Point(511, 443);
+            this.buttonSpeichern.Location = new System.Drawing.Point(431, 388);
             this.buttonSpeichern.Name = "buttonSpeichern";
             this.buttonSpeichern.Size = new System.Drawing.Size(75, 30);
             this.buttonSpeichern.TabIndex = 19;
@@ -195,7 +194,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.groupBoxZimmer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxZimmer.Location = new System.Drawing.Point(219, 72);
             this.groupBoxZimmer.Name = "groupBoxZimmer";
-            this.groupBoxZimmer.Size = new System.Drawing.Size(204, 401);
+            this.groupBoxZimmer.Size = new System.Drawing.Size(204, 346);
             this.groupBoxZimmer.TabIndex = 16;
             this.groupBoxZimmer.TabStop = false;
             this.groupBoxZimmer.Text = "Zimmer";
@@ -209,12 +208,11 @@ namespace Verwaltungstool.Forms.BuchungForms
             this.listBoxZimmer.ItemHeight = 19;
             this.listBoxZimmer.Location = new System.Drawing.Point(3, 23);
             this.listBoxZimmer.Name = "listBoxZimmer";
-            this.listBoxZimmer.Size = new System.Drawing.Size(198, 375);
+            this.listBoxZimmer.Size = new System.Drawing.Size(198, 320);
             this.listBoxZimmer.TabIndex = 0;
             // 
             // checkBoxHauptrasse
             // 
-            this.checkBoxHauptrasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxHauptrasse.AutoSize = true;
             this.checkBoxHauptrasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxHauptrasse.Location = new System.Drawing.Point(429, 193);
@@ -228,7 +226,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             // checkBoxFernseher
             // 
-            this.checkBoxFernseher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxFernseher.AutoSize = true;
             this.checkBoxFernseher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxFernseher.Location = new System.Drawing.Point(429, 168);
@@ -242,7 +239,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             // checkBoxKühlschrank
             // 
-            this.checkBoxKühlschrank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxKühlschrank.AutoSize = true;
             this.checkBoxKühlschrank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxKühlschrank.Location = new System.Drawing.Point(429, 143);
@@ -256,7 +252,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             // comboBoxTerrasseBalkon
             // 
-            this.comboBoxTerrasseBalkon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxTerrasseBalkon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTerrasseBalkon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTerrasseBalkon.FormattingEnabled = true;
@@ -269,7 +264,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             // comboBoxZimmerTyp
             // 
-            this.comboBoxZimmerTyp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxZimmerTyp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxZimmerTyp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxZimmerTyp.FormattingEnabled = true;
@@ -282,7 +276,6 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             // buttonFilter
             // 
-            this.buttonFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFilter.Location = new System.Drawing.Point(429, 86);
             this.buttonFilter.Name = "buttonFilter";
@@ -296,7 +289,7 @@ namespace Verwaltungstool.Forms.BuchungForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(679, 484);
+            this.ClientSize = new System.Drawing.Size(599, 429);
             this.Controls.Add(this.checkBoxHauptrasse);
             this.Controls.Add(this.checkBoxFernseher);
             this.Controls.Add(this.checkBoxKühlschrank);
